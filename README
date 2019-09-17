@@ -21,3 +21,8 @@ git push https://github.com/Serene-Flame/curly-waddle.git //본인의 git 주소
 
 //일정시간 이후 정보삭제
 git config --global credential.helper 'cache --timeout 7200' //2시간 후 정보 삭제
+
+//삭제
+rm test		//test파일 삭제
+rm -f test	//삭제할 때 확인 과정 없이
+rm -f test/	//test디렉토리를 삭제
