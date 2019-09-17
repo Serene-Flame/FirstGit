@@ -1,0 +1,23 @@
+jee's test doc
+
+git config --global user.name "이름"
+git config --global user.email "깃허브 메일주소"// 안하면 매번 물어봄
+
+mkdir ~/MyProject	//로컬 디렉토리 생성
+cd ~/MyProject		//생성된 디렉토리로 이동
+git init		//git  명령어를 사용할 수 있는 디렉토리로 지정
+git status		//현재 상태 확인 명령
+git add file.txt	//git 주목(작업중)목록에 파일을 추가
+git add .		//현제 디렉토리의 모든 파일을 추가
+git commit -m "메시지"	//커밋 스냅샷, 저장할 작업 내역 기록
+
+git remote add origin https://github.com/'username'/myproject.git	//로컬과 원격 저장소를 연결
+git remote -v 		//연결 상태를 확인
+git push origin master	//깃허브로 업로드(푸시)한다
+
+//터미널에서 git 자동 로그인
+git config credential.helper store
+git push https://github.com/Serene-Flame/curly-waddle.git //본인의 git 주소
+
+//일정시간 이후 정보삭제
+git config --global credential.helper 'cache --timeout 7200' //2시간 후 정보 삭제
