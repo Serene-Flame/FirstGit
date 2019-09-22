@@ -51,8 +51,8 @@ sudo git push
 sudo git pull
 
 자동 로그인(필요시 입력)
-git config credential.helper store
-git push https://github.com/본인의 저장소
+sudo git config credential.helper store
+sudo git push https://github.com/본인의 저장소
 
 일정 시간 후 해제(2시간 예시)
 git config --global credential.helper 'cache --timeout 7200'
