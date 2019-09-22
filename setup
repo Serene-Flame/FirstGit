@@ -1,0 +1,134 @@
+크롬 설치
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
+sudo apt-get update
+
+sudo apt-get install google-chrome-stable
+
+sudo rm -rf /etc/apt/sources.list.d/google.lis
+*******************************************************************
+
+Git 설치
+sudo apt-get install git-core
+
+Github 개인 정보 등록
+
+sudo git config --global user.name "본인 계정 입력"
+
+sudo git config --global user.email "본인 메일 주소 입력"
+
+sudo git config --global color.ui "auto"
+
+작업 폴더 생성
+sudo mkdir ~/works
+
+작업 디렉토리로 이동
+cd ~/works
+
+git사용 디렉토리로 초기화
+sudo git init
+
+원격 저장소 등록
+sudo git remote add origin https://github.com/본인의 git주소
+sudo git fetch origin
+
+git 상태확인
+git status
+git remove -v //원격저장소 연결상태 확인
+
+git 변경된 모든 파일 추가
+sudo git add -A //또는 sudo git add .
+
+커밋 메시지를 입력
+sudo git commit -m "메시지"
+
+저장소에 올리기(계정과 암호를 물어본다)
+sudo git push
+
+저장소에서 내려받기(업데이트)
+sudo git pull
+
+자동 로그인(필요시 입력)
+git config credential.helper store
+git push https://github.com/본인의 저장소
+
+일정 시간 후 해제(2시간 예시)
+git config --global credential.helper 'cache --timeout 7200'
+
+******************************************************************************
+이클립스 설치
+http://www.eclipse.org 에서 eclipse-inst-linux64.tar.gz를 다운
+
+다운로드한 디렉토리에서 tar xvzf 명령어로 압축을 해제 
+tar xvzf eclipse-inst-linux64.tar.gz
+
+압축 해제한 디렉토리에서 installer를 실행(안됨)
+./eclipse-installer/eclipse-inst
+
+eclipse는 java로 짜여진 프로그램이므로 java 라이브러리(jrk, jdk)가 필요
+
+오라클 홈페이지에서 top downloads -> Java SE를 찾아 클릭 
+https://www.oracle.com/technetwork/java/index.html
+
+원하는 버전이 없을경우 최신버전의 JDK 다운. 사용목적 : jrk, 개발목적 Jdk
+이클립스와 마찬가지로 tar.gz인 파일로 다운받아서 압축해제 
+
+mv 명령을 통해 압축을 해제한 jdk폴더를 이클립스 설치 폴더로 이동
+mv ~/Downloads/jdk-13 ~/Download/eclipse-installer/
+
+위에서 확인했던 오류메시지를 읽어보면 jre/bin에서 실행파일을 찾는다
+그러므로 mv명령을 이용해 폴더 이름을 jre로 변경
+mv ~/Downloads/eclipse-installer/jdk-13 jre
+
+이클립스 설치 디렉토리에서 installer를 실행
+./eclipse-installer/eclipse-inst
+
+필요한 환경에 맞는 패키지를 설치후 실행(안됨)
+마찬가지로 jre폴더가 필요하다고 하는데 cp명령어를 이용하여 치클립스 설치 폴더로 복사
+cp -r ~/Downloads/eclipse-installer/jre ~/eclipse/committers-2019-09/eclipse
+
+이클립스가 설치된 디렉토리로 가서 실행한다.
+~/eclipse/committers-2019-09/eclipse/eclipse
+
+계속 이러한 방식으로 실행하는게 귀찮기 때문에
+sudo ln -s ~/eclipse/committers-2019-09/eclipse/eclipse ~/usr/bin/eclipse
+를 통해서 링크파일을 심볼릭으로 만든다
+
+ls -al /usr/bin | grep eclipse 
+를 이용하면 eclipse를 사용가능한 명령어로 등록해 어디서든 쉽게 사용할 수 있다
+
+또한 mv /usr/bin/eclipse /usr/bin/myQuik 처럼 파일명을 바꿔 명령어를 변경할 수 있다
+****************************************************************
+유니티, ml agent 설치
+https://alexisrozhkov.github.io/unity_rl/
+이 블로그를 참조하여 설치
+
+유니티홈페이지 에서는 리눅스 정식버전을 다운받지 못하므로
+https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/page-2
+의 가장 마지막 글의 릴리즈를 다운받는다.
+
+ml agent는 아래의 github 문서를 참조하는것이 좋다. 
+https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md
+ml atent설치 과정을 나타내는 문서로 유니티의 설치와 pyton등 필요사항에 대하여 적혀있다.
+
+유니티는 다운로드한 디렉토리에서 실행하고, ml agent를 다운받는 동안 python과 pip의 버전을 확인한다.
+python --version 또는 python3 --version
+pip3
+를 입력하여 확인가능하며 python3.6, pip3가 설치되어 있어야 한다.
+
+없다면 설치해주면 된다.
+sudo apt-get update
+sudo apt-get install python3.6
+
+python3를 주로 이용할 것이므로 pip3와 venv도 설치한다.
+sudo apt-get install python3-pip python3-venv
+
+pip3는 가상환경을 사용하는 것을 전제하므로 그냥 사용하면 에러가 발생한다.
+따라서 pip3 통해 pip를 업그레이드한다.
+sudo -H pip3 install --upgrade pip
+
+ml agent를 설치한다.
+pip3 install mlagents
+
