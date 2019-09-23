@@ -1,4 +1,11 @@
-test크롬 설치
+vim 에디터 설치
+기본적으로 vi 에디터가 설치되어 있지만 추가기능을 위해 확장버전인 vim을 다운로드 한다.
+
+sudo apt-get update
+
+sudo apt-get install vim
+*******************************************************************
+크롬 설치
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -102,18 +109,14 @@ ls -al /usr/bin | grep eclipse
 또한 mv /usr/bin/eclipse /usr/bin/myQuik 처럼 파일명을 바꿔 명령어를 변경할 수 있다
 ****************************************************************
 유니티, ml agent 설치
-https://alexisrozhkov.github.io/unity_rl/
-이 블로그를 참조하여 설치
-
-유니티홈페이지 에서는 리눅스 정식버전을 다운받지 못하므로
-https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/page-2
-의 가장 마지막 글의 릴리즈를 다운받는다.
+https://www.youtube.com/watch?v=siy8qVFxwPs&list=PLctzObGsrjfwYHL1obWlVdPRbpubkuKWp&index=2
+다음의 유투브 영상을 참조하여 설치
 
 ml agent는 아래의 github 문서를 참조하는것이 좋다. 
 https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md
-ml atent설치 과정을 나타내는 문서로 유니티의 설치와 pyton등 필요사항에 대하여 적혀있다.
+ml atent설치 과정을 나타내는 문서로 유니티의 설치와 pyton등 필요사항에 대하여 적혀있다. 
 
-유니티는 다운로드한 디렉토리에서 실행하고, ml agent를 다운받는 동안 python과 pip의 버전을 확인한다.
+ml agent를 다운받는 동안 python과 pip의 버전을 확인한다.
 python --version 또는 python3 --version
 pip3
 를 입력하여 확인가능하며 python3.6, pip3가 설치되어 있어야 한다.
@@ -122,13 +125,40 @@ pip3
 sudo apt-get update
 sudo apt-get install python3.6
 
-python3를 주로 이용할 것이므로 pip3와 venv도 설치한다.
-sudo apt-get install python3-pip python3-venv
-
-pip3는 가상환경을 사용하는 것을 전제하므로 그냥 사용하면 에러가 발생한다.
-따라서 pip3 통해 pip를 업그레이드한다.
-sudo -H pip3 install --upgrade pip
+pip는 일종의 패키지 매니저로 ml agent가 필요로 하는 외부 의존 라이브러리를 자동설치한다.
+pip는 python의 버전에 따라 가지고 있어 pip2, pip3가 있을 수 있지만 pip로 묶어 사용할 수 있으므로 pip3라고 명시적으로 사용한다.
+sudo apt-get install python3-pip
+sudo pip3 install --upgrade pip
 
 ml agent를 설치한다.
-pip3 install mlagents
+sudo pip3 install mlagents
+
+이떄 오류가 발생 할 수 있는데 작성자가 경험한 2 가지는
+1. pip 를 설치, 패치할 때 sudo(관리자권한)을 주지 않아 스크립트가 꼬였을 경우
+2. 특정 프로그램이 ml agent가 원하는 버전과 맞지 않을 경우
+
+이때 pip를 삭제 재설치를 진행하고
+sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
+
+아래의 예와 같이 특정 프로그램을 버전에 맞게 업그레이드 한다.
+sudo pip3 install --upgrade bleach==1.5.0
+
+정상적으로 설치됐다면
+mlagents-learn --help
+의 결과가 
+
+                        ▄▄▄▓▓▓▓
+                   ╓▓▓▓▓▓▓█▓▓▓▓▓
+              ,▄▄▄m▀▀▀'  ,▓▓▓▀▓▓▄                           ▓▓▓  ▓▓▌
+            ▄▓▓▓▀'      ▄▓▓▀  ▓▓▓      ▄▄     ▄▄ ,▄▄ ▄▄▄▄   ,▄▄ ▄▓▓▌▄ ▄▄▄    ,▄▄
+          ▄▓▓▓▀        ▄▓▓▀   ▐▓▓▌     ▓▓▌   ▐▓▓ ▐▓▓▓▀▀▀▓▓▌ ▓▓▓ ▀▓▓▌▀ ^▓▓▌  ╒▓▓▌
+        ▄▓▓▓▓▓▄▄▄▄▄▄▄▄▓▓▓      ▓▀      ▓▓▌   ▐▓▓ ▐▓▓    ▓▓▓ ▓▓▓  ▓▓▌   ▐▓▓▄ ▓▓▌
+        ▀▓▓▓▓▀▀▀▀▀▀▀▀▀▀▓▓▄     ▓▓      ▓▓▌   ▐▓▓ ▐▓▓    ▓▓▓ ▓▓▓  ▓▓▌    ▐▓▓▐▓▓
+          ^█▓▓▓        ▀▓▓▄   ▐▓▓▌     ▓▓▓▓▄▓▓▓▓ ▐▓▓    ▓▓▓ ▓▓▓  ▓▓▓▄    ▓▓▓▓`
+            '▀▓▓▓▄      ^▓▓▓  ▓▓▓       └▀▀▀▀ ▀▀ ^▀▀    `▀▀ `▀▀   '▀▀    ▐▓▓▌
+               ▀▀▀▀▓▄▄▄   ▓▓▓▓▓▓,                                      ▓▓▓▓▀
+                   `▀█▓▓▓▓▓▓▓▓▓▌
+                        ¬`▀▀▀█▓
+
+이런 화면과 함께 설명이 나올것이다.
 
