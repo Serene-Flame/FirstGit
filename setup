@@ -5,6 +5,62 @@ sudo apt-get update
 
 sudo apt-get install vim
 *******************************************************************
+Visual studio code 설치 및 사용, 디버깅(C#)
+
+https://code.visualstudio.com/#alt-downloads
+위의 사이트에서 code설치파일 다운로드
+
+다운로드 디렉토리에서 압축해제
+tar xvzf code-stable-1568209119.tar.gz
+
+sudo mv VSCode-linux-x64 ~/
+로 홈디렉토리로 이동
+
+vi ~/.bashrc
+vi 에디터로 .bashrc파일을 열어 다음과 같이 입력한다. 
+<>는 해당 키를 입력하하는 것이고, <CD>는 엔터키이다
+<ESC> G<CD> o
+#users alias
+alias cod='~/VSCode-linux-x64/bin/code'
+<ESC> :wq <CD>
+
+alias는 단축명령어를 입력하는 명령어로 code와 실제 프로그램을 이어준다.
+재부팅후 터미널에 code를 입력하면 VS code가 실행된다.
+
+그리고 최신버전의 mono와 .net이 요구되며
+https://www.mono-project.com/download/stable/
+https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/install
+에서 각각 다운로드 가능하다
+
+mono는
+sudo apt install gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+sudo apt install mono-devel
+
+.net은 
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get install dotnet-sdk-3.0
+
+mono --version
+dotnet --version 
+으로 버젼을 확인
+
+원하는 위치에 원하는 디렉토리를 만들고 해당 디렉토리로 이동한다.
+dotnet new console
+로 예제프로젝트를 만들고 VS code를 실행한다.
+
+좌측 extensions에서 C#을 다운로드 하고 우측하단에 뭐든지 묻는다면 yes를 누른다.
+toolbar - file - open folder.. 이전에 만들어둔 디렉토리를 연다.
+
+디버그 하고싶은 라인에서 f9를 입력하거나 line number 옆을 글릭해 brake point를 만든다.
+좌측 debug탭에서 .NET core launch (console)가 정상적으로 선택되어 있으면 F5로 debuging한다.
+*******************************************************************
 크롬 설치
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
